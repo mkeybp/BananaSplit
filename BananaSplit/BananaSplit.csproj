@@ -41,7 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Boost.cs" />
+    <Compile Include="Loot\Boost.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Feedback.cs" />
@@ -50,7 +50,7 @@
     <Compile Include="HighscoreSaves.cs" />
     <Compile Include="Level 1.cs" />
     <Compile Include="Level 2.cs" />
-    <Compile Include="Loot.cs" />
+    <Compile Include="Loot\Loot.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Player.cs" />

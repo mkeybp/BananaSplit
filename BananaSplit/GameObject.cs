@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -20,12 +21,40 @@ namespace BananaSplit
         //Bruges til Player og Enemey movement.
         protected float speed;
         //Bruges også til Player og Enemy movement.
-        protected float velocity;
-        //Bruges til Player og Enemy position.
+        protected Vector2 velocity;
+        //Bruges til at holde styr på Player og Enemy position.
+        protected Vector2 position;
+        //Bruges til at finde midtpunket af Player og Enemy sprite.
         protected Vector2 origin;
         //Holder styr på hvilken tast som bliver brugt i øjeblikket.
         protected KeyboardState currentKey;
         //Holder styr på hvilken key som blev brugt sidst.
         protected KeyboardState previousKey;
+        //Holder styr på hvor langt man er i et Array.
+        private int currentIndex;
+        //
+        private float timeElapsed;
+
+        protected void Animation(GameTime gameTime)
+        {
+            timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            currentIndex = (int)(timeElapsed * fps);
+            sprite = sprites[currentIndex];
+
+            if(currentIndex >= sprites.Length - 1)
+            {
+                timeElapsed = 0;
+                currentIndex = 0;
+            }
+
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 1);
+            //spriteBatch.Draw(sprite, origin, Color.White);
+        }
+        public abstract void LoadContent(ContentManager content);
+
+        public abstract void Update(GameTime gameTime);
     }
 }

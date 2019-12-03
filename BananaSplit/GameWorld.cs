@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace BananaSplit
 {
@@ -9,6 +10,8 @@ namespace BananaSplit
     /// </summary>
     public class GameWorld : Game
     {
+        public static List<GameObject> gameObjects;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -27,6 +30,9 @@ namespace BananaSplit
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            gameObjects = new List<GameObject>();
+
+            //gameObjects.Add(new Player("", Vector2.Zero));
 
             base.Initialize();
         }
@@ -41,6 +47,10 @@ namespace BananaSplit
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            foreach(GameObject go in gameObjects)
+            {
+                go.LoadContent(Content);
+            }
         }
 
         /// <summary>
@@ -76,6 +86,14 @@ namespace BananaSplit
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            foreach(GameObject gameObject in gameObjects)
+            {
+                gameObject.Draw(spriteBatch);
+            }
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

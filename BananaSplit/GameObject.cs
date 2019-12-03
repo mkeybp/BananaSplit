@@ -51,7 +51,6 @@ namespace BananaSplit
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 1);
-            //spriteBatch.Draw(sprite, origin, Color.White);
         }
         public abstract void LoadContent(ContentManager content);
 

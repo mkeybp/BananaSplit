@@ -30,10 +30,10 @@ namespace BananaSplit
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            graphics.IsFullScreen = false;
+            graphics.ApplyChanges();
             gameObjects = new List<GameObject>();
-
-            //gameObjects.Add(new Player("", Vector2.Zero));
-
+            gameObjects.Add(new Player());
             base.Initialize();
         }
 
@@ -47,9 +47,9 @@ namespace BananaSplit
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            foreach(GameObject go in gameObjects)
+            foreach(GameObject gameObject in gameObjects)
             {
-                go.LoadContent(Content);
+                gameObject.LoadContent(Content);
             }
         }
 

@@ -34,6 +34,9 @@ namespace BananaSplit
             graphics.ApplyChanges();
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
+            gameObjects.Add(new Enemy());
+            gameObjects.Add(new Platform());
+            gameObjects.Add(new Loot());
             base.Initialize();
         }
 

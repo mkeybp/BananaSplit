@@ -12,24 +12,23 @@ namespace BananaSplit
 {
     class Player : GameObject
     {
-        private float speed;
-        private Vector2 velocity;
+
         public Player()
         {
-            speed = 100f;
+            speed = 50f;
         
         }
 
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[2];
+            sprites = new Texture2D[3];
 
             for (int i = 0; i < sprites.Length; i++)
             {
                 sprites[i] = content.Load<Texture2D>(i + 1 + ("player"));
             }
 
-            fps = 5;
+            fps = 8;
 
             sprite = sprites [0];
             
@@ -39,17 +38,16 @@ namespace BananaSplit
         {
             HandleInput(gameTime);
             Move(gameTime);
-            Animation(gameTime);
+            //Animation(gameTime);
         }
 
 
         public void HandleInput(GameTime gameTime)
         {
-            previousKey = currentKey;
             currentKey = Keyboard.GetState();
-            //KeyboardState keyState = Keyboard.GetState();
+            previousKey = currentKey;
 
-            //velocity = Vector2.Zero;
+            velocity = Vector2.Zero;
 
             if (currentKey.IsKeyDown(Keys.D))
             {
@@ -63,10 +61,14 @@ namespace BananaSplit
             {
                 velocity += new Vector2(0, -1);
             }
-           /* if((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.S))
+            if((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.S))
             {
                 Animation(gameTime);
-            }*/
+            }
+            if (velocity != Vector2.Zero)
+            {
+                velocity.Normalize();
+            }
         }
         public void Move(GameTime gameTime)
         {

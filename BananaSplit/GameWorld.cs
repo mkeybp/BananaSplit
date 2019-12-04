@@ -10,7 +10,7 @@ namespace BananaSplit
     /// </summary>
     public class GameWorld : Game
     {
-        public static List<GameObject> gameObjects;
+        private List<GameObject> gameObjects = new List<GameObject>();
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -73,6 +73,11 @@ namespace BananaSplit
                 Exit();
 
             // TODO: Add your update logic here
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }

@@ -16,7 +16,7 @@ namespace BananaSplit
         public Player()
         {
             speed = 100f;
-        
+            
         }
 
         public override void LoadContent(ContentManager content)
@@ -38,7 +38,7 @@ namespace BananaSplit
         {
             HandleInput(gameTime);
             Move(gameTime);
-            //Animation(gameTime);
+            Gravity(gameTime);
         }
 
 
@@ -61,7 +61,7 @@ namespace BananaSplit
             {
                 velocity += new Vector2(0, -1);
             }
-            if((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W))
+            if ((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W))
             {
                 Animation(gameTime);
             }
@@ -75,6 +75,14 @@ namespace BananaSplit
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             position += ((velocity * speed) * deltaTime);
+        }
+        public void Gravity(GameTime gameTime)
+        {
+            if(position.Y < 225)
+            {
+            velocity += new Vector2(0, 1);
+            }
+            Move(gameTime);
         }
     }
 }

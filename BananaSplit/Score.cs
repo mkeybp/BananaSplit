@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace BananaSplit
 {
-    class Score
+    class Score 
     {
+        public int Bananer = 0;
+
+        public Score()
+        {
+        }
     }
 }

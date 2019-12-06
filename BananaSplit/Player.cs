@@ -15,7 +15,7 @@ namespace BananaSplit
 
         public Player()
         {
-            speed = 50f;
+            speed = 100f;
         
         }
 
@@ -61,7 +61,7 @@ namespace BananaSplit
             {
                 velocity += new Vector2(0, -1);
             }
-            if((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.S))
+            if((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W))
             {
                 Animation(gameTime);
             }

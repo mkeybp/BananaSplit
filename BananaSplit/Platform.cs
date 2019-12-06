@@ -20,6 +20,7 @@ namespace BananaSplit
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("platform");
+            //sprite = content.Load<Texture2D>("background");
         }
 
         public override void Update(GameTime gameTime)

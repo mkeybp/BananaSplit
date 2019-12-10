@@ -46,7 +46,6 @@ namespace BananaSplit
                 timeElapsed = 0;
                 currentIndex = 0;
             }
-
         }
         public void Draw(SpriteBatch spriteBatch)
         {

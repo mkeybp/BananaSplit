@@ -8,10 +8,11 @@ namespace BananaSplit
 {
     class Score 
     {
-        public int Bananer = 0;
+        private int Bananer;
 
         public Score()
         {
+            Bananer = 0;
         }
     }
 }

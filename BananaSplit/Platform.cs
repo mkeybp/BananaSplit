@@ -12,20 +12,33 @@ namespace BananaSplit
 {
     class Platform : GameObject
     {
+        //private List<Platform> platforms = new List<Platform>();
+
         public Platform()
         {
 
         }
 
+        /*public void Initialize(GameTime gameTime)
+        {
+            platforms.Add(new Platform());
+        }*/
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("platform");
-            //sprite = content.Load<Texture2D>("background");
+            //background = content.Load<Texture2D>("background");
+            position = new Vector2(0,425);
+            //position = new Vector2(100, 225);
+            //position = new Vector2(200, 225);
         }
 
         public override void Update(GameTime gameTime)
         {
 
         }
+        /*public void Level_1()
+        {
+            
+        }*/
     }
 }

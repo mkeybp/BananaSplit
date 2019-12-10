@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
 namespace BananaSplit
@@ -11,6 +12,7 @@ namespace BananaSplit
     public class GameWorld : Game
     {
         private List<GameObject> gameObjects = new List<GameObject>();
+
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -35,7 +37,7 @@ namespace BananaSplit
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
             //gameObjects.Add(new Enemy());
-            //gameObjects.Add(new Platform());
+            gameObjects.Add(new Platform());
             //gameObjects.Add(new Loot());
             base.Initialize();
         }

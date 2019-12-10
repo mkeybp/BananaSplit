@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,10 @@ namespace BananaSplit
 {
     class Player : GameObject
     {
-
         public Player()
         {
-            speed = 100f;
-            
+            speed = 200f;
+            position = new Vector2(0, 170);
         }
 
         public override void LoadContent(ContentManager content)
@@ -31,7 +31,6 @@ namespace BananaSplit
             fps = 8;
 
             sprite = sprites [0];
-            
         }
 
         public override void Update(GameTime gameTime)
@@ -41,8 +40,7 @@ namespace BananaSplit
             Gravity(gameTime);
         }
 
-
-        public void HandleInput(GameTime gameTime)
+        private void HandleInput(GameTime gameTime)
         {
             currentKey = Keyboard.GetState();
             previousKey = currentKey;
@@ -59,7 +57,7 @@ namespace BananaSplit
             }
             if(currentKey.IsKeyDown(Keys.W))
             {
-                velocity += new Vector2(0, -1);
+                velocity += new Vector2(0, -5);
             }
             if ((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W))
             {
@@ -70,15 +68,15 @@ namespace BananaSplit
                 velocity.Normalize();
             }
         }
-        public void Move(GameTime gameTime)
+        private void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             position += ((velocity * speed) * deltaTime);
         }
-        public void Gravity(GameTime gameTime)
+        private void Gravity(GameTime gameTime)
         {
-            if(position.Y < 225)
+            if(position.Y < 170)
             {
             velocity += new Vector2(0, 1);
             }

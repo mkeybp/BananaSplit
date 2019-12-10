@@ -12,8 +12,16 @@ namespace BananaSplit
     {
         private List<GameObject> gameObjects = new List<GameObject>();
 
+        //private Camera camera;
+        //private Player player;
+
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private static int PcScreenHeight;
+        private static int PcScreenWidth;
 
         public GameWorld()
         {
@@ -30,8 +38,11 @@ namespace BananaSplit
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            PcScreenHeight = graphics.PreferredBackBufferHeight;
+            PcScreenWidth = graphics.PreferredBackBufferWidth;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
+
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
             //gameObjects.Add(new Enemy());

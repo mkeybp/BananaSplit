@@ -16,7 +16,7 @@ namespace BananaSplit
         public Player()
         {
             speed = 200f;
-            position = new Vector2(0, 170);
+            position = new Vector2(0, 169);
         }
 
         public override void LoadContent(ContentManager content)
@@ -37,9 +37,22 @@ namespace BananaSplit
         {
             HandleInput(gameTime);
             Move(gameTime);
-            Gravity(gameTime);
+            //Gravity(gameTime);
+            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 436 || position.Y > 436 + sprite.Height)
+            {
+                // No collision
+                Gravity(gameTime);
+            }
+            else
+            {
+                // Collision
+                
+            }
+            if(position.Y > 240d)
+            {
+                position = new Vector2(0, 170);
+            }
         }
-
         private void HandleInput(GameTime gameTime)
         {
             currentKey = Keyboard.GetState();
@@ -47,19 +60,19 @@ namespace BananaSplit
 
             velocity = Vector2.Zero;
 
-            if (currentKey.IsKeyDown(Keys.D))
+            if (currentKey.IsKeyDown(Keys.D) || (currentKey.IsKeyDown(Keys.Right)))
             {
                 velocity += new Vector2(1, 0);
             }
-            if(currentKey.IsKeyDown(Keys.A))
+            if (currentKey.IsKeyDown(Keys.A) || (currentKey.IsKeyDown(Keys.Left)))
             {
                 velocity += new Vector2(-1, 0);
             }
-            if(currentKey.IsKeyDown(Keys.W))
+            if (currentKey.IsKeyDown(Keys.W)) //&& !previousKey.IsKeyDown(Keys.Space))
             {
-                velocity += new Vector2(0, -5);
+                velocity += new Vector2(0, -1);
             }
-            if ((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W))
+            if ((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W) || currentKey.IsKeyDown(Keys.Right) || currentKey.IsKeyDown(Keys.Left) || currentKey.IsKeyDown(Keys.Up))
             {
                 Animation(gameTime);
             }
@@ -76,7 +89,7 @@ namespace BananaSplit
         }
         private void Gravity(GameTime gameTime)
         {
-            if(position.Y < 170)
+            if(position.Y < 400)
             {
             velocity += new Vector2(0, 1);
             }

@@ -46,7 +46,11 @@ namespace BananaSplit
             else
             {
                 // Collision
-                
+                if(currentKey.IsKeyDown(Keys.W) || previousKey.IsKeyDown(Keys.W))//currentKey.IsKeyDown(Keys.Up))
+                {
+                    velocity += new Vector2(0, -300);
+                }
+                Move(gameTime);
             }
             if(position.Y > 1050)
             {
@@ -68,10 +72,10 @@ namespace BananaSplit
             {
                 velocity += new Vector2(-1, 0);
             }
-            if (currentKey.IsKeyDown(Keys.W) || (currentKey.IsKeyDown(Keys.Up)))
+            /*if (currentKey.IsKeyDown(Keys.W) || (currentKey.IsKeyDown(Keys.Up)))
             {
                 velocity += new Vector2(0, -1);
-            }
+            }*/
             if ((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W) || currentKey.IsKeyDown(Keys.Right) || currentKey.IsKeyDown(Keys.Left) || currentKey.IsKeyDown(Keys.Up))
             {
                 Animation(gameTime);

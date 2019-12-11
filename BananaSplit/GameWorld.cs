@@ -14,6 +14,13 @@ namespace BananaSplit
     {
         private List<GameObject> gameObjects = new List<GameObject>();
 
+        private Texture2D test;
+        private Texture2D background1;
+        private Texture2D background2;
+        private Texture2D background3;
+        private Texture2D background4;
+
+        private Vector2 screenSize;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -34,12 +41,16 @@ namespace BananaSplit
         {
             // TODO: Add your initialization logic here
             graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
+            screenSize.X = 1920;
+            screenSize.Y = 1080;
             graphics.ApplyChanges();
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
-            //gameObjects.Add(new Enemy());
+            gameObjects.Add(new Enemy());
             gameObjects.Add(new Platform());
-            //gameObjects.Add(new Loot());
+            gameObjects.Add(new Loot());
             base.Initialize();
         }
 
@@ -52,13 +63,19 @@ namespace BananaSplit
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            
+            //test = Content.Load<Texture2D>("test");
+            background1 = Content.Load<Texture2D>("1background");
+            background2 = Content.Load<Texture2D>("2background");
+            background3 = Content.Load<Texture2D>("3background");
+            background4 = Content.Load<Texture2D>("4background");
 
             // TODO: use this.Content to load your game content here
-            foreach(GameObject gameObject in gameObjects)
+            foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
             }
+            //screenWidth = device.PresentationParameters.BackBufferWidth;
+            //screenHeight = device.PresentationParameters.BackBufferHeight;
         }
 
         /// <summary>
@@ -101,7 +118,13 @@ namespace BananaSplit
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            foreach(GameObject gameObject in gameObjects)
+            //spriteBatch.Draw(test, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(background1, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(background2, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(background3, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(background4, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+            foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);
             }

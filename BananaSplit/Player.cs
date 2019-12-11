@@ -16,7 +16,7 @@ namespace BananaSplit
         public Player()
         {
             speed = 200f;
-            position = new Vector2(0, 169);
+            position = new Vector2(0, 750);
         }
 
         public override void LoadContent(ContentManager content)
@@ -38,7 +38,7 @@ namespace BananaSplit
             HandleInput(gameTime);
             Move(gameTime);
             //Gravity(gameTime);
-            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 436 || position.Y > 436 + sprite.Height)
+            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
                 // No collision
                 Gravity(gameTime);
@@ -48,9 +48,9 @@ namespace BananaSplit
                 // Collision
                 
             }
-            if(position.Y > 240d)
+            if(position.Y > 1050)
             {
-                position = new Vector2(0, 170);
+                position = new Vector2(0, 750);
             }
         }
         private void HandleInput(GameTime gameTime)
@@ -89,7 +89,7 @@ namespace BananaSplit
         }
         private void Gravity(GameTime gameTime)
         {
-            if(position.Y < 400)
+            if(position.Y < 1200)
             {
             velocity += new Vector2(0, 1);
             }

@@ -14,7 +14,7 @@ namespace BananaSplit
     {
         public Loot()
         {
-
+            position = new Vector2(400, 800);
         }
 
         public override void LoadContent(ContentManager content)
@@ -24,7 +24,20 @@ namespace BananaSplit
 
         public override void Update(GameTime gameTime)
         {
+            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 436 || position.Y > 436 + sprite.Height)
+            {
+                // No collision
+            }
+            else
+            {
+                // Collision
+               // position = new Vector2(100, 100);
 
+            }
+           /* if (position.Y > 240d)
+            {
+                position = new Vector2(0, 170);
+            }*/
         }
     }
 }

@@ -24,20 +24,20 @@ namespace BananaSplit
 
         public override void Update(GameTime gameTime)
         {
-            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 436 || position.Y > 436 + sprite.Height)
+            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 10 || position.Y > 10 + sprite.Height)
             {
                 // No collision
             }
             else
             {
                 // Collision
-               // position = new Vector2(100, 100);
+               position = new Vector2(100, 100);
 
             }
-           /* if (position.Y > 240d)
+            if (position.Y > 1080)
             {
-                position = new Vector2(0, 170);
-            }*/
+                position = new Vector2(0, 500);
+            }
         }
     }
 }

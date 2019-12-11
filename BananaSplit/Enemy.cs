@@ -35,6 +35,19 @@ namespace BananaSplit
         public override void Update(GameTime gameTime)
         {
             Animation(gameTime);
+            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
+            {
+                // No collision
+            }
+            else
+            {
+                // Collision
+
+            }
+            if (position.Y > 1050)
+            {
+                position = new Vector2(0, 750);
+            }
         }
     }
 }

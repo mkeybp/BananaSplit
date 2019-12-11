@@ -20,6 +20,11 @@ namespace BananaSplit
         private Texture2D background2;
         private Texture2D background3;
         private Texture2D background4;
+        private Texture2D heartFull;
+        private Texture2D heartEmpty;
+        private Texture2D bananaPoints;
+        private int bananaCounter1;
+        private SpriteFont bananaCounter;
 
         private Vector2 screenSize;
 
@@ -31,6 +36,7 @@ namespace BananaSplit
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Instance = this;
+            bananaCounter1 = 0;
         }
 
         /// <summary>
@@ -68,6 +74,11 @@ namespace BananaSplit
             background2 = Content.Load<Texture2D>("2background");
             background3 = Content.Load<Texture2D>("3background");
             background4 = Content.Load<Texture2D>("4background");
+            heartFull = Content.Load<Texture2D>("heartfull");
+            heartEmpty = Content.Load<Texture2D>("heartempty");
+            bananaPoints = Content.Load<Texture2D>("smallBanana");
+            bananaCounter = Content.Load<SpriteFont>("bananaCounter");
+
 
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObject in gameObjects)
@@ -83,7 +94,7 @@ namespace BananaSplit
             {
                 if(!(go is Player))
                 {
-                    go.position += velocity;
+                    go.position += velocity * 10;
                 }
                 /*if (go is BackGround)
                 {
@@ -136,6 +147,13 @@ namespace BananaSplit
             spriteBatch.Draw(background2, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.Draw(background3, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.Draw(background4, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(heartFull, new Vector2(10, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(heartFull, new Vector2(50, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(heartFull, new Vector2(90, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(bananaPoints, new Vector2(10, 70), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(bananaCounter, ": " + bananaCounter1, new Vector2(65, 75), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+            //spriteBatch.Draw(heartEmpty, new Vector2(100, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             foreach (GameObject gameObject in gameObjects)
             {

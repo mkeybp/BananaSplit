@@ -15,7 +15,7 @@ namespace BananaSplit
     {
         public Player()
         {
-            speed = 200f;
+            speed = 50f;
             position = new Vector2(0, 750);
         }
 
@@ -94,7 +94,7 @@ namespace BananaSplit
         {
             if(position.Y < 1200 && !currentKey.IsKeyDown(Keys.W) && !currentKey.IsKeyDown(Keys.Up))
             {
-            velocity += new Vector2(0, 3);
+            velocity += new Vector2(0, 10);
             }
             Move(gameTime);
         }

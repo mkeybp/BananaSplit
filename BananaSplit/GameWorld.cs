@@ -13,6 +13,7 @@ namespace BananaSplit
     public class GameWorld : Game
     {
         private List<GameObject> gameObjects = new List<GameObject>();
+        public static GameWorld Instance;
 
         private Texture2D test;
         private Texture2D background1;
@@ -29,6 +30,7 @@ namespace BananaSplit
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Instance = this;
         }
 
         /// <summary>
@@ -43,8 +45,6 @@ namespace BananaSplit
             graphics.IsFullScreen = false;
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            screenSize.X = 1920;
-            screenSize.Y = 1080;
             graphics.ApplyChanges();
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
@@ -77,7 +77,20 @@ namespace BananaSplit
             //screenWidth = device.PresentationParameters.BackBufferWidth;
             //screenHeight = device.PresentationParameters.BackBufferHeight;
         }
-
+        public void moveAll(Vector2 velocity)
+        {
+            foreach(GameObject go in gameObjects)
+            {
+                if(!(go is Player))
+                {
+                    go.position += velocity;
+                }
+                /*if (go is BackGround)
+                {
+                    go.position += velocity * 2;
+                }*/
+            }
+        }
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.

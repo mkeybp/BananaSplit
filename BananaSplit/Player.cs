@@ -38,7 +38,7 @@ namespace BananaSplit
             HandleInput(gameTime);
             Move(gameTime);
             //Gravity(gameTime);
-            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height && !currentKey.IsKeyDown(Keys.W))
+            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
                 // No collision
                 Gravity(gameTime);
@@ -80,6 +80,9 @@ namespace BananaSplit
             {
                 velocity.Normalize();
             }
+            Vector2 temp = velocity;
+            temp.Y = 0;
+            GameWorld.Instance.moveAll(-temp);
         }
         private void Move(GameTime gameTime)
         {
@@ -89,7 +92,7 @@ namespace BananaSplit
         }
         private void Gravity(GameTime gameTime)
         {
-            if(position.Y < 1200 && !currentKey.IsKeyDown(Keys.W))
+            if(position.Y < 1200 && !currentKey.IsKeyDown(Keys.W) && !currentKey.IsKeyDown(Keys.Up))
             {
             velocity += new Vector2(0, 3);
             }

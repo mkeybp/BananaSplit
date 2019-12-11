@@ -23,7 +23,7 @@ namespace BananaSplit
         //Bruges også til Player og Enemy movement.
         protected Vector2 velocity;
         //Bruges til at holde styr på Player og Enemy position.
-        protected Vector2 position;
+        public Vector2 position;
         //Bruges til at finde midtpunket af Player og Enemy sprite.
         protected Vector2 origin;
         //Holder styr på hvilken tast som bliver brugt i øjeblikket.

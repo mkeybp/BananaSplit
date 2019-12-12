@@ -94,11 +94,28 @@ namespace BananaSplit
             //screenWidth = device.PresentationParameters.BackBufferWidth;
             //screenHeight = device.PresentationParameters.BackBufferHeight;
         }
+        //public void moveAll(Vector2 velocity)
+        //{
+        //    foreach (GameObject go in gameObjects)
+        //    {
+        //        if (!(go is Player))
+        //        {
+        //            go.position += velocity * 10;
+        //        }
+        //        /*if (go is BackGround)
+        //        {
+        //            go.position += velocity * 2;
+        //        }*/
+        //    }
+        //}
+
+
+
         public void moveAll(Vector2 velocity)
         {
             foreach (GameObject go in gameObjects)
             {
-                if (!(go is Player))
+                if (!(go is Player) && !(go is Projectile))
                 {
                     go.position += velocity * 10;
                 }
@@ -108,6 +125,10 @@ namespace BananaSplit
                 }*/
             }
         }
+
+
+
+
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.

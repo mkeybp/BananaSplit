@@ -41,7 +41,7 @@ namespace BananaSplit
             currentIndex = (int)(timeElapsed * fps);
             sprite = sprites[currentIndex];
 
-            if(currentIndex >= sprites.Length - 1)
+            if (currentIndex >= sprites.Length - 1)
             {
                 timeElapsed = 0;
                 currentIndex = 0;

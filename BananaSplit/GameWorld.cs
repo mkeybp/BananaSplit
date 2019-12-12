@@ -13,6 +13,9 @@ namespace BananaSplit
     public class GameWorld : Game
     {
         private List<GameObject> gameObjects = new List<GameObject>();
+        public List<GameObject> gameObjectsToAdd = new List<GameObject>();
+        public List<GameObject> gameObjectsToRemove = new List<GameObject>();
+
         public static GameWorld Instance;
 
         private Texture2D test;
@@ -28,7 +31,7 @@ namespace BananaSplit
 
         private Vector2 screenSize;
 
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public GameWorld()
@@ -90,9 +93,9 @@ namespace BananaSplit
         }
         public void moveAll(Vector2 velocity)
         {
-            foreach(GameObject go in gameObjects)
+            foreach (GameObject go in gameObjects)
             {
-                if(!(go is Player))
+                if (!(go is Player))
                 {
                     go.position += velocity * 10;
                 }
@@ -127,8 +130,13 @@ namespace BananaSplit
             {
                 gameObject.Update(gameTime);
             }
-            
+
             base.Update(gameTime);
+            gameObjects.AddRange(gameObjectsToAdd);
+            gameObjects.RemoveAll(go => gameObjectsToRemove.Contains(go));
+            gameObjectsToRemove.Clear();
+
+            gameObjectsToAdd.Clear();
         }
 
         /// <summary>

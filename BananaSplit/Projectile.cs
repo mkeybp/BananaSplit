@@ -68,6 +68,10 @@ namespace BananaSplit
             UpdateProjectiles();
 
         }
+        public override void OnCollision(GameObject other)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

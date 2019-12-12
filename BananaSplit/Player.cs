@@ -20,7 +20,12 @@ namespace BananaSplit
             speed = 50f;
             position = new Vector2(0, 750);
         }
-
+        private static Vector2 playerPosition;
+        public static Vector2 PlayerPosition
+        {
+            get { return playerPosition; }
+            set { playerPosition = value; }
+        }
         public override void LoadContent(ContentManager content)
         {
             this.content = content;
@@ -41,6 +46,8 @@ namespace BananaSplit
         {
             HandleInput(gameTime);
             Move(gameTime);
+            playerPosition = this.position;
+
             //Gravity(gameTime);
             if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {

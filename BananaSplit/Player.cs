@@ -13,6 +13,8 @@ namespace BananaSplit
 {
     class Player : GameObject
     {
+        ContentManager content;
+
         public Player()
         {
             speed = 50f;
@@ -21,6 +23,8 @@ namespace BananaSplit
 
         public override void LoadContent(ContentManager content)
         {
+            this.content = content;
+
             sprites = new Texture2D[3];
 
             for (int i = 0; i < sprites.Length; i++)
@@ -30,7 +34,7 @@ namespace BananaSplit
 
             fps = 8;
 
-            sprite = sprites [0];
+            sprite = sprites[0];
         }
 
         public override void Update(GameTime gameTime)
@@ -46,13 +50,13 @@ namespace BananaSplit
             else
             {
                 // Collision
-                if(currentKey.IsKeyDown(Keys.W) || previousKey.IsKeyDown(Keys.W))//currentKey.IsKeyDown(Keys.Up))
+                if (currentKey.IsKeyDown(Keys.W) || previousKey.IsKeyDown(Keys.W))//currentKey.IsKeyDown(Keys.Up))
                 {
                     velocity += new Vector2(0, -300);
                 }
                 Move(gameTime);
             }
-            if(position.Y > 1050)
+            if (position.Y > 1050)
             {
                 position = new Vector2(0, 750);
             }
@@ -71,6 +75,12 @@ namespace BananaSplit
             if (currentKey.IsKeyDown(Keys.A) || (currentKey.IsKeyDown(Keys.Left)))
             {
                 velocity += new Vector2(-1, 0);
+            }
+
+            if (currentKey.IsKeyDown(Keys.Space))
+            {
+                Projectile projectile = new Projectile(content.Load<Texture2D>("banana"));
+                GameWorld.Instance.gameObjectsToAdd.Add(projectile);
             }
             /*if (currentKey.IsKeyDown(Keys.W) || (currentKey.IsKeyDown(Keys.Up)))
             {
@@ -96,9 +106,9 @@ namespace BananaSplit
         }
         private void Gravity(GameTime gameTime)
         {
-            if(position.Y < 1200 && !currentKey.IsKeyDown(Keys.W) && !currentKey.IsKeyDown(Keys.Up))
+            if (position.Y < 1200 && !currentKey.IsKeyDown(Keys.W) && !currentKey.IsKeyDown(Keys.Up))
             {
-            velocity += new Vector2(0, 10);
+                velocity += new Vector2(0, 10);
             }
             Move(gameTime);
         }

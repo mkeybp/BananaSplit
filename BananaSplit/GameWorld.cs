@@ -14,6 +14,7 @@ namespace BananaSplit
     {
         private List<GameObject> gameObjects = new List<GameObject>();
         public static GameWorld Instance;
+        Song song;
 
         private Texture2D test;
         private Texture2D background1;
@@ -78,7 +79,9 @@ namespace BananaSplit
             heartEmpty = Content.Load<Texture2D>("heartempty");
             bananaPoints = Content.Load<Texture2D>("smallBanana");
             bananaCounter = Content.Load<SpriteFont>("bananaCounter");
-
+            song = Content.Load<Song>("By the Fire");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
 
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObject in gameObjects)

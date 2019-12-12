@@ -152,6 +152,12 @@
 /processorParam:TextureFormat=Compressed
 /build:bananaCounter.spritefont
 
+#begin By the Fire.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:By the Fire.mp3
+
 #begin heartempty.png
 /importer:TextureImporter
 /processor:TextureProcessor

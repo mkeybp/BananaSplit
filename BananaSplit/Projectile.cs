@@ -18,7 +18,9 @@ namespace BananaSplit
 
         public Projectile(Texture2D loadedTexture)
         {
-            position = new Vector2(player.position.X, player.position.Y);
+            this.position = new Vector2(Player.PlayerPosition.X, Player.PlayerPosition.Y);
+
+            //position = new Vector2(player.position.X, player.position.Y);
             velocity = new Vector2(10, 0);
             sprite = loadedTexture;
             alive = true;

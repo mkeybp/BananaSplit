@@ -45,7 +45,7 @@ namespace BananaSplit
             if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
                 // No collision
-                Gravity(gameTime);
+                Gravity2(gameTime);
             }
             else
             {
@@ -104,13 +104,24 @@ namespace BananaSplit
 
             position += ((velocity * speed) * deltaTime);
         }
-        private void Gravity(GameTime gameTime)
+        /*private void Gravity(GameTime gameTime)
         {
-            if (position.Y < 1200 && !currentKey.IsKeyDown(Keys.W) && !currentKey.IsKeyDown(Keys.Up))
+            while (position.Y < 1200)
             {
                 velocity += new Vector2(0, 10);
             }
             Move(gameTime);
+        }*/
+        private void Gravity2(GameTime gametime)
+        {
+            if (position.Y < 1080)//isGrounded == false)
+            {
+                velocity += new Vector2(0, 10 * (float)gametime.ElapsedGameTime.TotalSeconds);
+            }
+            else
+            {
+                velocity = Vector2.Zero;
+            }
         }
     }
 }

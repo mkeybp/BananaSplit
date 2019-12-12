@@ -98,7 +98,7 @@ namespace BananaSplit
         {
             foreach (GameObject go in gameObjects)
             {
-                if (!(go is Player))
+                if (!(go is Player) && !(go is Projectile))
                 {
                     go.position += velocity * 10;
                 }

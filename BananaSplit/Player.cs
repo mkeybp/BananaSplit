@@ -134,11 +134,12 @@ namespace BananaSplit
             }
 
 
-            if (kbState.IsKeyDown(Keys.W))
+            if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W))
             {
-                velocity += new Vector2(0, -1);
+                velocity += new Vector2(0, -50);
 
             }
+
 
 
             if (kbState.IsKeyDown(Keys.Space) && previousKBState.IsKeyUp(Keys.Space))

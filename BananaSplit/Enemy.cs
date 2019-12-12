@@ -49,5 +49,9 @@ namespace BananaSplit
                 position = new Vector2(0, 750);
             }
         }
+        public override void OnCollision(GameObject other)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

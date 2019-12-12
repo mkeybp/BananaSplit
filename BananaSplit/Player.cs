@@ -102,5 +102,9 @@ namespace BananaSplit
             }
             Move(gameTime);
         }
+        public override void OnCollision(GameObject @object)
+        {
+            position = new Vector2(0, 0);
+        }
     }
 }

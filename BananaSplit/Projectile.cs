@@ -25,6 +25,10 @@ namespace BananaSplit
         {
 
         }
+        public override void OnCollision(GameObject other)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

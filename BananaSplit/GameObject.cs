@@ -35,6 +35,22 @@ namespace BananaSplit
         //
         private float timeElapsed;
 
+        public virtual Rectangle CollisionBox
+        {
+            get
+            {
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width / 2, sprite.Height);
+            }
+        }
+        public abstract void OnCollision(GameObject other);
+
+        public void CheckCollision(GameObject other)
+        {
+            if (CollisionBox.Intersects(other.CollisionBox))
+            {
+                OnCollision(other);
+            }
+        }
         protected void Animation(GameTime gameTime)
         {
             timeElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;

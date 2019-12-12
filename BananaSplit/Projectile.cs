@@ -14,7 +14,7 @@ namespace BananaSplit
     {
         public bool alive;
 
-        Player player = new Player();
+        //Player player = new Player();
 
         public Projectile(Texture2D loadedTexture)
         {

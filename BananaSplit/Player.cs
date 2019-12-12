@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BananaSplit
@@ -14,6 +15,7 @@ namespace BananaSplit
     class Player : GameObject
     {
         ContentManager content;
+        KeyboardState previousKBState;
 
         public Player()
         {
@@ -70,37 +72,91 @@ namespace BananaSplit
         }
         private void HandleInput(GameTime gameTime)
         {
-            currentKey = Keyboard.GetState();
-            previousKey = currentKey;
+            //currentKey = Keyboard.GetState();
+            //previousKey = currentKey;
+
+            //velocity = Vector2.Zero;
+
+            //if (currentKey.IsKeyDown(Keys.D) || (currentKey.IsKeyDown(Keys.Right)))
+            //{
+            //    velocity += new Vector2(1, 0);
+            //}
+            //if (currentKey.IsKeyDown(Keys.A) || (currentKey.IsKeyDown(Keys.Left)))
+            //{
+            //    velocity += new Vector2(-1, 0);
+            //}
+            //// Shoot
+            ////if (currentKey.IsKeyDown(Keys.Space))
+            ////{
+
+            ////}
+
+            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            //{
+            //    Projectile projectile = new Projectile(content.Load<Texture2D>("banana"));
+            //    GameWorld.Instance.gameObjectsToAdd.Add(projectile);
+            //}
+
+
+            //if (currentKey.IsKeyDown(Keys.W) || (currentKey.IsKeyDown(Keys.Up)))
+            //{
+            //    velocity += new Vector2(0, -1);
+            //}
+
+
+            //if ((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W) || currentKey.IsKeyDown(Keys.Right) || currentKey.IsKeyDown(Keys.Left) || currentKey.IsKeyDown(Keys.Up))
+            //{
+            //    Animation(gameTime);
+            //}
+            //if (velocity != Vector2.Zero)
+            //{
+            //    velocity.Normalize();
+            //}
+
+
+
 
             velocity = Vector2.Zero;
 
-            if (currentKey.IsKeyDown(Keys.D) || (currentKey.IsKeyDown(Keys.Right)))
-            {
-                velocity += new Vector2(1, 0);
-            }
-            if (currentKey.IsKeyDown(Keys.A) || (currentKey.IsKeyDown(Keys.Left)))
+
+
+
+            KeyboardState kbState = Keyboard.GetState();
+            if (kbState.IsKeyDown(Keys.A))
             {
                 velocity += new Vector2(-1, 0);
+
+            }
+            if (kbState.IsKeyDown(Keys.D))
+            {
+                velocity += new Vector2(1, 0);
+
             }
 
-            if (currentKey.IsKeyDown(Keys.Space))
+
+            if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W))
+            {
+                velocity += new Vector2(0, -50);
+
+            }
+
+
+
+            if (kbState.IsKeyDown(Keys.Space) && previousKBState.IsKeyUp(Keys.Space))
             {
                 Projectile projectile = new Projectile(content.Load<Texture2D>("banana"));
                 GameWorld.Instance.gameObjectsToAdd.Add(projectile);
             }
-            /*if (currentKey.IsKeyDown(Keys.W) || (currentKey.IsKeyDown(Keys.Up)))
-            {
-                velocity += new Vector2(0, -1);
-            }*/
-            if ((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W) || currentKey.IsKeyDown(Keys.Right) || currentKey.IsKeyDown(Keys.Left) || currentKey.IsKeyDown(Keys.Up))
+
+            if ((kbState.IsKeyDown(Keys.D)) || (kbState.IsKeyDown(Keys.A)) || kbState.IsKeyDown(Keys.W) || kbState.IsKeyDown(Keys.Right) || kbState.IsKeyDown(Keys.Left) || kbState.IsKeyDown(Keys.Up))
             {
                 Animation(gameTime);
             }
-            if (velocity != Vector2.Zero)
-            {
-                velocity.Normalize();
-            }
+
+
+            previousKBState = kbState;
+
+
             Vector2 temp = velocity;
             temp.Y = 0;
             GameWorld.Instance.moveAll(-temp);

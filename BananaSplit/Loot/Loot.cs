@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,32 +14,58 @@ namespace BananaSplit
 {
     class Loot : GameObject
     {
+
+        public Player player = new Player();
+        private Texture2D lootSprite;
+
+        //Texture2D lootSprite;
+
+
         public Loot()
         {
             position = new Vector2(400, 800);
+            //sprite = new lootSprite;
         }
 
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("banana");
+
+
+            sprite = lootSprite = content.Load<Texture2D>("banana");
+
         }
+
+        /// Todo:
+        /// get set loot position. ELLER Hardcode en position
+        /// 
 
         public override void Update(GameTime gameTime)
         {
-            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 10 || position.Y > 10 + sprite.Height)
+            if (Player.PlayerPosition.X + sprite.Width < 100 || Player.PlayerPosition.X > 100 + lootSprite.Width || position.Y + sprite.Height < 100 || Player.PlayerPosition.Y > 100 + lootSprite.Height)
             {
-                // No collision
+                Debug.WriteLine("Works");
+
             }
             else
             {
-                // Collision
-               position = new Vector2(100, 100);
+                Debug.WriteLine("done");
+            }
 
-            }
-            if (position.Y > 1080)
-            {
-                position = new Vector2(0, 500);
-            }
+
+            //if (Player.PlayerPosition.X + sprite.Width < 10 || Player.PlayerPosition.X > 10 + sprite.Width || Player.PlayerPosition.Y + sprite.Height < 10 || Player.PlayerPosition.Y > 10 + sprite.Height)
+            //{
+            //    // No collision
+            //}
+            //else
+            //{
+            //    // Collision
+            //    position = new Vector2(100, 100);
+
+            //}
+            //if (position.Y > 1080)
+            //{
+            //    position = new Vector2(0, 500);
+            //}
         }
     }
 }

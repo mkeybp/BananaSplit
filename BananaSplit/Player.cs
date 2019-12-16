@@ -17,10 +17,17 @@ namespace BananaSplit
         ContentManager content;
         KeyboardState previousKBState;
 
+
+        //Flere sprites i et array.
+        
+        //En sprite.
+        private Texture2D playersprite;
         public Player()
         {
             speed = 50f;
             position = new Vector2(0, 750);
+
+            sprite = playersprite;
         }
         private static Vector2 playerPosition;
         public static Vector2 PlayerPosition
@@ -28,6 +35,7 @@ namespace BananaSplit
             get { return playerPosition; }
             set { playerPosition = value; }
         }
+
         public override void LoadContent(ContentManager content)
         {
             this.content = content;
@@ -42,6 +50,10 @@ namespace BananaSplit
             fps = 8;
 
             sprite = sprites[0];
+
+            //sprite = playersprite;
+
+
         }
 
         public override void Update(GameTime gameTime)
@@ -69,6 +81,11 @@ namespace BananaSplit
             {
                 position = new Vector2(0, 750);
             }
+
+
+
+            if (PlayerPosition.X + playersprite.Width < 100 || PlayerPosition.X > 100 + lootSprite.Width || position.Y + playersprite.Height < 100 || Player.PlayerPosition.Y > 100 + lootSprite.Height)
+            { }
         }
         private void HandleInput(GameTime gameTime)
         {

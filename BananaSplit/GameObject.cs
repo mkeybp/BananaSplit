@@ -16,6 +16,11 @@ namespace BananaSplit
         protected Texture2D[] sprites;
         //En sprite.
         protected Texture2D sprite;
+
+        public Texture2D tex;
+
+
+
         //Frames per seconds, bruges til animation af sprites.
         protected int fps;
         //Bruges til Player og Enemey movement.
@@ -50,6 +55,7 @@ namespace BananaSplit
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 1);
+
         }
         public abstract void LoadContent(ContentManager content);
 

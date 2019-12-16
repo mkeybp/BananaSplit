@@ -23,10 +23,15 @@ namespace BananaSplit
 
         public Loot()
         {
-            position = new Vector2(400, 800);
+            position = new Vector2(0, 750);
             //sprite = new lootSprite;
         }
-
+        private static Vector2 lootPosition;
+        public static Vector2 LootPosition
+        {
+            get { return lootPosition; }
+            set { lootPosition = value; }
+        }
         public override void LoadContent(ContentManager content)
         {
 
@@ -41,15 +46,19 @@ namespace BananaSplit
 
         public override void Update(GameTime gameTime)
         {
-            if (Player.PlayerPosition.X + sprite.Width < 100 || Player.PlayerPosition.X > 100 + lootSprite.Width || position.Y + sprite.Height < 100 || Player.PlayerPosition.Y > 100 + lootSprite.Height)
-            {
-                Debug.WriteLine("Works");
 
-            }
-            else
-            {
-                Debug.WriteLine("done");
-            }
+            lootPosition = this.position;
+
+
+            //if (Player.PlayerPosition.X + sprite.Width < 100 || Player.PlayerPosition.X > 100 + lootSprite.Width || position.Y + sprite.Height < 100 || Player.PlayerPosition.Y > 100 + lootSprite.Height)
+            //{
+            //    Debug.WriteLine("Works");
+
+            //}
+            //else
+            //{
+            //    Debug.WriteLine("done");
+            //}
 
 
             //if (Player.PlayerPosition.X + sprite.Width < 10 || Player.PlayerPosition.X > 10 + sprite.Width || Player.PlayerPosition.Y + sprite.Height < 10 || Player.PlayerPosition.Y > 10 + sprite.Height)

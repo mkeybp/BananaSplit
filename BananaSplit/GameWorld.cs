@@ -27,7 +27,7 @@ namespace BananaSplit
         private Texture2D heartFull;
         private Texture2D heartEmpty;
         private Texture2D bananaPoints;
-        private int bananaCounter1;
+        public int bananaCounter1;
         private SpriteFont bananaCounter;
 
         private Vector2 screenSize;

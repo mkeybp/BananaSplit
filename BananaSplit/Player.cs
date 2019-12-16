@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -30,6 +31,8 @@ namespace BananaSplit
             sprite = playersprite;
         }
         private static Vector2 playerPosition;
+        private bool isAlive;
+
         public static Vector2 PlayerPosition
         {
             get { return playerPosition; }
@@ -62,6 +65,21 @@ namespace BananaSplit
             Move(gameTime);
             playerPosition = this.position;
 
+
+            if (playerPosition == Loot.LootPosition)
+            {
+                Debug.WriteLine("Hit");
+                //++bananaCounter1;
+                isAlive = false;
+                GameWorld.Instance.bananaCounter1++;
+            }
+            else
+                Debug.WriteLine("miss");
+            //Gravity(gameTime);
+
+
+
+
             //Gravity(gameTime);
             if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
@@ -84,8 +102,7 @@ namespace BananaSplit
 
 
 
-            if (PlayerPosition.X + playersprite.Width < 100 || PlayerPosition.X > 100 + lootSprite.Width || position.Y + playersprite.Height < 100 || Player.PlayerPosition.Y > 100 + lootSprite.Height)
-            { }
+
         }
         private void HandleInput(GameTime gameTime)
         {
@@ -157,6 +174,19 @@ namespace BananaSplit
 
             }
 
+
+            Debug.WriteLine("Loot pos" + Loot.LootPosition);
+            Debug.WriteLine("Player pos" + PlayerPosition);
+
+
+
+
+            if (kbState.IsKeyDown(Keys.X))
+            {
+                position = Loot.LootPosition;
+
+
+            }
 
 
             if (kbState.IsKeyDown(Keys.Space) && previousKBState.IsKeyUp(Keys.Space))

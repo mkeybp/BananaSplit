@@ -16,6 +16,7 @@ namespace BananaSplit
         protected Texture2D[] sprites;
         //En sprite.
         protected Texture2D sprite;
+        protected Texture2D platforms;
         //Frames per seconds, bruges til animation af sprites.
         protected int fps;
         //Bruges til Player og Enemey movement.
@@ -34,6 +35,13 @@ namespace BananaSplit
         private int currentIndex;
         //
         private float timeElapsed;
+        public string spriteName;
+
+       /* protected GameObject(string spriteName, Vector2 pos)
+        {
+            this.spriteName = spriteName;
+            this.position = pos;
+        }*/
 
         protected void Animation(GameTime gameTime)
         {

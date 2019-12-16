@@ -15,6 +15,7 @@ namespace BananaSplit
         private List<GameObject> gameObjects = new List<GameObject>();
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjectsToRemove = new List<GameObject>();
+        public static List<GameObject> newObjects;
 
         public static GameWorld Instance;
         Song song;
@@ -34,6 +35,7 @@ namespace BananaSplit
 
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+       // static ContentManager ContentInstance;
 
         public GameWorld()
         {
@@ -42,7 +44,12 @@ namespace BananaSplit
             Instance = this;
             bananaCounter1 = 0;
         }
+        public static void Instanciate(GameObject gameObject)
+        {
+            //gameObject.LoadContent(ContentInstance);
+            newObjects.Add(gameObject);
 
+        }
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -57,6 +64,7 @@ namespace BananaSplit
             graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
             gameObjects = new List<GameObject>();
+            newObjects = new List<GameObject>();
             gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
             gameObjects.Add(new Platform());
@@ -111,7 +119,7 @@ namespace BananaSplit
 
 
 
-        public void moveAll(Vector2 velocity)
+        public void MoveAll(Vector2 velocity)
         {
             foreach (GameObject go in gameObjects)
             {
@@ -156,6 +164,7 @@ namespace BananaSplit
             }
 
             base.Update(gameTime);
+            gameObjects.AddRange(newObjects);
             gameObjects.AddRange(gameObjectsToAdd);
             gameObjects.RemoveAll(go => gameObjectsToRemove.Contains(go));
             gameObjectsToRemove.Clear();
@@ -184,6 +193,8 @@ namespace BananaSplit
             spriteBatch.Draw(heartFull, new Vector2(90, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.Draw(bananaPoints, new Vector2(10, 70), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.DrawString(bananaCounter, ": " + bananaCounter1, new Vector2(65, 75), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            
+
 
             //spriteBatch.Draw(heartEmpty, new Vector2(100, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 

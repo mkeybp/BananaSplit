@@ -49,12 +49,20 @@ namespace BananaSplit
             HandleInput(gameTime);
             Move(gameTime);
             playerPosition = this.position;
+            Projectile projectile = new Projectile(content.Load<Texture2D>("banana"));
+            GameWorld.Instance.gameObjectsToAdd.Add(projectile);
 
             //Gravity(gameTime);
             if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
                 // No collision
                 Gravity(gameTime);
+                /*GameWorld.Instanciate(new Platform("", new Vector2(100,100)));
+                GameWorld.Instanciate(new Platform("", new Vector2(200, 300)));
+                GameWorld.Instanciate(new Platform("", new Vector2(300, 400)));
+                GameWorld.Instanciate(new Platform("", new Vector2(500, 600)));
+                GameWorld.Instanciate(new Platform("", new Vector2(600, 700)));
+                GameWorld.Instanciate(new Platform("", new Vector2(700, 800)));*/
             }
             else
             {
@@ -70,6 +78,7 @@ namespace BananaSplit
                 position = new Vector2(0, 750);
             }
         }
+
         private void HandleInput(GameTime gameTime)
         {
             //currentKey = Keyboard.GetState();
@@ -122,7 +131,7 @@ namespace BananaSplit
 
 
             KeyboardState kbState = Keyboard.GetState();
-            if (kbState.IsKeyDown(Keys.A))
+           /* if (kbState.IsKeyDown(Keys.A))
             {
                 velocity += new Vector2(-1, 0);
 
@@ -131,7 +140,7 @@ namespace BananaSplit
             {
                 velocity += new Vector2(1, 0);
 
-            }
+            }*/
 
 
             if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W))
@@ -159,7 +168,7 @@ namespace BananaSplit
 
             Vector2 temp = velocity;
             temp.Y = 0;
-            GameWorld.Instance.moveAll(-temp);
+            GameWorld.Instance.MoveAll(-temp);
         }
         private void Move(GameTime gameTime)
         {

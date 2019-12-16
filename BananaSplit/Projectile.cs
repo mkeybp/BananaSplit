@@ -21,7 +21,7 @@ namespace BananaSplit
             this.position = new Vector2(Player.PlayerPosition.X, Player.PlayerPosition.Y);
 
             //position = new Vector2(player.position.X, player.position.Y);
-            velocity = new Vector2(10, 0);
+            velocity = new Vector2(100, 0);
             sprite = loadedTexture;
             alive = true;
         }

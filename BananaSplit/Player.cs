@@ -104,7 +104,10 @@ namespace BananaSplit
         }
         public override void OnCollision(GameObject @object)
         {
-            position = new Vector2(0, 0);
+            if (@object is Loot)
+            {
+                //this.position = new Vector2(0, 0);
+            }
         }
     }
 }

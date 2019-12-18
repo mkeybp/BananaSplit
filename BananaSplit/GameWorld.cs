@@ -90,9 +90,9 @@ namespace BananaSplit
         }
         public void moveAll(Vector2 velocity)
         {
-            foreach(GameObject go in gameObjects)
+            foreach (GameObject go in gameObjects)
             {
-                if(!(go is Player))
+                if (!(go is Player))
                 {
                     go.position += velocity * 10;
                 }
@@ -126,8 +126,18 @@ namespace BananaSplit
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Update(gameTime);
+
             }
-            
+            foreach (GameObject gameObject in gameObjects)
+            {
+                foreach (GameObject gameObject1 in gameObjects)
+                {
+                    if (gameObject == gameObject1)
+                        continue;
+
+                    gameObject.CheckCollision(gameObject1);
+                }
+            }
             base.Update(gameTime);
         }
 

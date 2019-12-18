@@ -156,7 +156,16 @@ namespace BananaSplit
             {
                 gameObject.Update(gameTime);
             }
+            foreach (GameObject gameObject in gameObjects)
+            {
+                foreach (GameObject gameObject1 in gameObjects)
+                {
+                    if (gameObject == gameObject1)
+                        continue;
 
+                    gameObject.CheckCollision(gameObject1);
+                }
+            }
             base.Update(gameTime);
             gameObjects.AddRange(gameObjectsToAdd);
             gameObjects.RemoveAll(go => gameObjectsToRemove.Contains(go));

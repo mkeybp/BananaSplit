@@ -18,6 +18,13 @@ namespace BananaSplit
         {
             position = new Vector2(0, 1000);
         }
+        public override Rectangle CollisionBox
+        {
+            get
+            {
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+            }
+        }
 
         public void Initialize(GameTime gameTime)
         {

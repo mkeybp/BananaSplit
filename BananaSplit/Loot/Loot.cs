@@ -23,7 +23,7 @@ namespace BananaSplit
 
         public Loot()
         {
-            position = new Vector2(0, 750);
+            position = new Vector2(500, 750);
             //sprite = new lootSprite;
         }
         private static Vector2 lootPosition;

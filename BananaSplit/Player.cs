@@ -18,6 +18,8 @@ namespace BananaSplit
         ContentManager content;
         KeyboardState previousKBState;
 
+        private bool isGrounded = true;
+
 
         //Flere sprites i et array.
         
@@ -71,17 +73,21 @@ namespace BananaSplit
                 Debug.WriteLine("Hit");
                 //++bananaCounter1;
                 isAlive = false;
-                GameWorld.Instance.bananaCounter1++;
+                //GameWorld.Instance.bananaCounter1++;
             }
             else
                 Debug.WriteLine("miss");
-            //Gravity(gameTime);
+            if(isGrounded == false)
+            {
+                Gravity(gameTime);
+            }
+            isGrounded = false;
 
 
 
 
             //Gravity(gameTime);
-            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
+           /* if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
                 // No collision
                 Gravity(gameTime);
@@ -98,7 +104,7 @@ namespace BananaSplit
             if (position.Y > 1050)
             {
                 position = new Vector2(0, 750);
-            }
+            }*/
 
 
 
@@ -168,7 +174,7 @@ namespace BananaSplit
             }
 
 
-            if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W))
+            if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W) && isGrounded == true)
             {
                 velocity += new Vector2(0, -50);
 
@@ -227,7 +233,16 @@ namespace BananaSplit
         {
             if (@object is Loot)
             {
+                GameWorld.Instance.bananaCounter1++;
                 this.position = new Vector2(0, 0);
+            }
+            if(!(@object is Platform))
+            {
+                isGrounded = false;
+            }
+            if(@object is Platform)
+            {
+                isGrounded = true;
             }
         }
     }

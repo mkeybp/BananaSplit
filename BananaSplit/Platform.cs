@@ -35,5 +35,9 @@ namespace BananaSplit
         {
 
         }
+        public override void OnCollision(GameObject @object)
+        {
+
+        }
     }
 }

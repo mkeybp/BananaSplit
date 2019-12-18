@@ -221,6 +221,14 @@ namespace BananaSplit
                 velocity += new Vector2(0, 10);
             }
             Move(gameTime);
+
+        }
+        public override void OnCollision(GameObject @object)
+        {
+            if (@object is Loot)
+            {
+                this.position = new Vector2(0, 0);
+            }
         }
     }
 }

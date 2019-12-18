@@ -41,7 +41,7 @@ namespace BananaSplit
         }
 
         /// Todo:
-        /// get set loot position. ELLER Hardcode en position
+        /// get set loot position. ELLER Harde en position
         /// 
 
         public override void Update(GameTime gameTime)
@@ -75,6 +75,10 @@ namespace BananaSplit
             //{
             //    position = new Vector2(0, 500);
             //}
+        }
+        public override void OnCollision(GameObject @object)
+        {
+
         }
     }
 }

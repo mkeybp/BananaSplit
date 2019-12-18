@@ -16,7 +16,7 @@ namespace BananaSplit
 
         public Platform()
         {
-            position = new Vector2(0, 1000);
+            position = new Vector2(0, 1020);
         }
 
         public void Initialize(GameTime gameTime)
@@ -25,9 +25,9 @@ namespace BananaSplit
         }
         public override void LoadContent(ContentManager content)
         {
+
             sprite = content.Load<Texture2D>("platform");
             //position = new Vector2(0, 425);
-            //sprite = content.Load<Texture2D>("platform");
             //position = new Vector2(100, 425);
         }
 

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace BananaSplit
 {
@@ -19,7 +20,6 @@ namespace BananaSplit
         public static GameWorld Instance;
         Song song;
 
-        private Texture2D test;
         private Texture2D background1;
         private Texture2D background2;
         private Texture2D background3;
@@ -28,6 +28,7 @@ namespace BananaSplit
         private Texture2D heartEmpty;
         private Texture2D bananaPoints;
         public int bananaCounter1;
+        public int health;
         private SpriteFont bananaCounter;
 
         private Vector2 screenSize;
@@ -35,12 +36,14 @@ namespace BananaSplit
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Instance = this;
             bananaCounter1 = 0;
+            health = 3;
         }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace BananaSplit
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
             graphics.ApplyChanges();
@@ -63,6 +66,8 @@ namespace BananaSplit
             gameObjects.Add(new Enemy());
             gameObjects.Add(new Platform());
             gameObjects.Add(new Loot());
+            gameObjects.Add(new Boost());
+
             base.Initialize();
         }
 
@@ -76,10 +81,10 @@ namespace BananaSplit
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //test = Content.Load<Texture2D>("test");
-            background1 = Content.Load<Texture2D>("1background");
-            background2 = Content.Load<Texture2D>("2background");
-            background3 = Content.Load<Texture2D>("3background");
-            background4 = Content.Load<Texture2D>("4background");
+            background1 = Content.Load<Texture2D>("background");
+            //background2 = Content.Load<Texture2D>("2background");
+            //background3 = Content.Load<Texture2D>("3background");
+            //background4 = Content.Load<Texture2D>("4background");
             heartFull = Content.Load<Texture2D>("heartfull");
             heartEmpty = Content.Load<Texture2D>("heartempty");
             bananaPoints = Content.Load<Texture2D>("smallBanana");
@@ -96,30 +101,15 @@ namespace BananaSplit
             //screenWidth = device.PresentationParameters.BackBufferWidth;
             //screenHeight = device.PresentationParameters.BackBufferHeight;
         }
-        //public void moveAll(Vector2 velocity)
-        //{
-        //    foreach (GameObject go in gameObjects)
-        //    {
-        //        if (!(go is Player))
-        //        {
-        //            go.position += velocity * 10;
-        //        }
-        //        /*if (go is BackGround)
-        //        {
-        //            go.position += velocity * 2;
-        //        }*/
-        //    }
-        //}
 
 
-
-        public void moveAll(Vector2 velocity)
+        public void MoveAll(Vector2 velocity)
         {
             foreach (GameObject go in gameObjects)
             {
                 if (!(go is Player) && !(go is Projectile))
                 {
-                    go.position += velocity * 10;
+                    go.position += velocity * 15;
                 }
                 /*if (go is BackGround)
                 {
@@ -171,8 +161,15 @@ namespace BananaSplit
             gameObjects.RemoveAll(go => gameObjectsToRemove.Contains(go));
             gameObjectsToRemove.Clear();
 
+            Debug.WriteLine(health);
+
+
             gameObjectsToAdd.Clear();
         }
+
+
+
+
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -180,23 +177,42 @@ namespace BananaSplit
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+
+
+
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            //spriteBatch.Draw(test, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.Draw(background1, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(background2, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(background3, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(background4, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(heartFull, new Vector2(10, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(heartFull, new Vector2(50, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.Draw(heartFull, new Vector2(90, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            //spriteBatch.Draw(background2, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            //spriteBatch.Draw(background3, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            //spriteBatch.Draw(background4, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+
+            if (health == 1 || health == 2 || health == 3)
+            {
+                spriteBatch.Draw(heartFull, new Vector2(10, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            }
+            if (health == 2 || health == 3)
+            {
+                spriteBatch.Draw(heartFull, new Vector2(50, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            }
+            if (health == 3)
+            {
+                spriteBatch.Draw(heartFull, new Vector2(90, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+            }
+            if (health == 0)
+            {
+                bananaCounter1 = 0;
+            }
+
+
             spriteBatch.Draw(bananaPoints, new Vector2(10, 70), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             spriteBatch.DrawString(bananaCounter, ": " + bananaCounter1, new Vector2(65, 75), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
-            //spriteBatch.Draw(heartEmpty, new Vector2(100, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             foreach (GameObject gameObject in gameObjects)
             {

@@ -19,7 +19,10 @@ namespace BananaSplit
 
         public Texture2D tex;
 
+        public bool isAlive;
+        
 
+   
 
         //Frames per seconds, bruges til animation af sprites.
         protected int fps;

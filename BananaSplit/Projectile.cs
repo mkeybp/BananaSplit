@@ -12,50 +12,27 @@ namespace BananaSplit
 {
     class Projectile : GameObject
     {
-        public bool alive;
-
-        //Player player = new Player();
 
         public Projectile(Texture2D loadedTexture)
         {
-            this.position = new Vector2(Player.PlayerPosition.X, Player.PlayerPosition.Y);
-
-            //position = new Vector2(player.position.X, player.position.Y);
+            this.position = new Vector2(Player.PlayerPosition.X + 180, Player.PlayerPosition.Y + 125);
             velocity = new Vector2(10, 0);
             sprite = loadedTexture;
-            alive = true;
+            isAlive = true;
         }
-
-        //public void FireProjectile()
-        //{
-        //    //foreach (Projectile b in projectiles)
-        //    //{
-        //    //    if (!b.alive)
-        //    //    {
-        //    //        b.alive = true;
-        //    //        b.position.Y = proj.position.Y;
-        //    //        b.position.X = proj.position.X + (proj.sprite.Width / 2) - (b.sprite.Width / 2);
-        //    //        b.velocity = new Vector2(0, -5.0f);
-        //    //        return;
-        //    //    }
-        //    //}
-        //}
 
         private void UpdateProjectiles()
         {
-            //foreach (Projectile p in projectiles)
-            //{
-            if (alive)
+            if (isAlive)
             {
                 position += velocity;
                 Rectangle viewPortRect = new Rectangle(0, 0, GameWorld.Instance.graphics.GraphicsDevice.Viewport.Width, GameWorld.Instance.graphics.GraphicsDevice.Viewport.Height);
                 if (!viewPortRect.Contains(new Point((int)position.X, (int)position.Y)))
                 {
-                    alive = false;
+                    isAlive = false;
                     GameWorld.Instance.gameObjectsToRemove.Add(this);
                 }
             }
-            //}
         }
 
 
@@ -68,9 +45,16 @@ namespace BananaSplit
             UpdateProjectiles();
 
         }
+
+        Enemy enemy = new Enemy();
+
         public override void OnCollision(GameObject @object)
         {
 
+            //if (@object is Enemy)
+            //{
+            //    enemy.enemyHealth--;
+            //}
         }
 
     }

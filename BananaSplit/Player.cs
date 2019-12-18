@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace BananaSplit
 {
@@ -18,20 +19,15 @@ namespace BananaSplit
         ContentManager content;
         KeyboardState previousKBState;
 
-
-        //Flere sprites i et array.
-        
-        //En sprite.
-        private Texture2D playersprite;
         public Player()
         {
             speed = 50f;
-            position = new Vector2(0, 750);
+            position = new Vector2(0, 760);
 
-            sprite = playersprite;
+
         }
         private static Vector2 playerPosition;
-        private bool isAlive;
+
 
         public static Vector2 PlayerPosition
         {
@@ -53,10 +49,6 @@ namespace BananaSplit
             fps = 8;
 
             sprite = sprites[0];
-
-            //sprite = playersprite;
-
-
         }
 
         public override void Update(GameTime gameTime)
@@ -64,21 +56,6 @@ namespace BananaSplit
             HandleInput(gameTime);
             Move(gameTime);
             playerPosition = this.position;
-
-
-            if (playerPosition == Loot.LootPosition)
-            {
-                Debug.WriteLine("Hit");
-                //++bananaCounter1;
-                isAlive = false;
-                GameWorld.Instance.bananaCounter1++;
-            }
-            else
-                Debug.WriteLine("miss");
-            //Gravity(gameTime);
-
-
-
 
             //Gravity(gameTime);
             if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
@@ -97,7 +74,7 @@ namespace BananaSplit
             }
             if (position.Y > 1050)
             {
-                position = new Vector2(0, 750);
+                position = new Vector2(0, 760);
             }
 
 
@@ -106,53 +83,7 @@ namespace BananaSplit
         }
         private void HandleInput(GameTime gameTime)
         {
-            //currentKey = Keyboard.GetState();
-            //previousKey = currentKey;
-
-            //velocity = Vector2.Zero;
-
-            //if (currentKey.IsKeyDown(Keys.D) || (currentKey.IsKeyDown(Keys.Right)))
-            //{
-            //    velocity += new Vector2(1, 0);
-            //}
-            //if (currentKey.IsKeyDown(Keys.A) || (currentKey.IsKeyDown(Keys.Left)))
-            //{
-            //    velocity += new Vector2(-1, 0);
-            //}
-            //// Shoot
-            ////if (currentKey.IsKeyDown(Keys.Space))
-            ////{
-
-            ////}
-
-            //if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            //{
-            //    Projectile projectile = new Projectile(content.Load<Texture2D>("banana"));
-            //    GameWorld.Instance.gameObjectsToAdd.Add(projectile);
-            //}
-
-
-            //if (currentKey.IsKeyDown(Keys.W) || (currentKey.IsKeyDown(Keys.Up)))
-            //{
-            //    velocity += new Vector2(0, -1);
-            //}
-
-
-            //if ((currentKey.IsKeyDown(Keys.D)) || (currentKey.IsKeyDown(Keys.A)) || currentKey.IsKeyDown(Keys.W) || currentKey.IsKeyDown(Keys.Right) || currentKey.IsKeyDown(Keys.Left) || currentKey.IsKeyDown(Keys.Up))
-            //{
-            //    Animation(gameTime);
-            //}
-            //if (velocity != Vector2.Zero)
-            //{
-            //    velocity.Normalize();
-            //}
-
-
-
-
             velocity = Vector2.Zero;
-
-
 
 
             KeyboardState kbState = Keyboard.GetState();
@@ -170,29 +101,23 @@ namespace BananaSplit
 
             if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W))
             {
-                velocity += new Vector2(0, -50);
+                velocity += new Vector2(0, -250);
 
             }
-
-
-            Debug.WriteLine("Loot pos" + Loot.LootPosition);
-            Debug.WriteLine("Player pos" + PlayerPosition);
-
-
-
-
-            if (kbState.IsKeyDown(Keys.X))
-            {
-                position = Loot.LootPosition;
-
-
-            }
-
 
             if (kbState.IsKeyDown(Keys.Space) && previousKBState.IsKeyUp(Keys.Space))
             {
-                Projectile projectile = new Projectile(content.Load<Texture2D>("banana"));
+                Projectile projectile = new Projectile(content.Load<Texture2D>("stone"));
                 GameWorld.Instance.gameObjectsToAdd.Add(projectile);
+
+
+            }
+
+            else if (!kbState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyUp(Keys.Space))
+
+            {
+                sprite = content.Load<Texture2D>("player_shooting");
+
             }
 
             if ((kbState.IsKeyDown(Keys.D)) || (kbState.IsKeyDown(Keys.A)) || kbState.IsKeyDown(Keys.W) || kbState.IsKeyDown(Keys.Right) || kbState.IsKeyDown(Keys.Left) || kbState.IsKeyDown(Keys.Up))
@@ -200,13 +125,12 @@ namespace BananaSplit
                 Animation(gameTime);
             }
 
-
             previousKBState = kbState;
 
 
             Vector2 temp = velocity;
             temp.Y = 0;
-            GameWorld.Instance.moveAll(-temp);
+            GameWorld.Instance.MoveAll(-temp);
         }
         private void Move(GameTime gameTime)
         {
@@ -227,8 +151,17 @@ namespace BananaSplit
         {
             if (@object is Loot)
             {
-                this.position = new Vector2(0, 0);
+                GameWorld.Instance.bananaCounter1++;
             }
+            else if (@object is Enemy)
+            {
+                GameWorld.Instance.health--;
+            }
+            else if (@object is Boost)
+            {
+            }
+
         }
+
     }
 }

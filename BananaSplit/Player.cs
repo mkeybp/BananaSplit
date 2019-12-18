@@ -151,7 +151,7 @@ namespace BananaSplit
         {
             if (@object is Loot)
             {
-                GameWorld.Instance.bananaCounter1++;
+                GameWorld.Instance.bananaCounter1 += 1000;
             }
             else if (@object is Enemy)
             {
@@ -159,6 +159,8 @@ namespace BananaSplit
             }
             else if (@object is Boost)
             {
+                GameWorld.Instance.bananaCounter1 += 4000;
+
             }
 
         }

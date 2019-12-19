@@ -17,9 +17,9 @@ namespace BananaSplit
         public List<GameObject> gameObjectsToRemove = new List<GameObject>();
 
         public static GameWorld Instance;
-        Song song;
+        private Song song;
 
-        private Texture2D test;
+
         private Texture2D background1;
         private Texture2D background2;
         private Texture2D background3;
@@ -33,7 +33,8 @@ namespace BananaSplit
         private Vector2 screenSize;
 
         public GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        
+        public SpriteBatch spriteBatch;
 
         public GameWorld()
         {
@@ -113,21 +114,6 @@ namespace BananaSplit
 
 
 
-        public void moveAll(Vector2 velocity)
-        {
-            foreach (GameObject go in gameObjects)
-            {
-                if (!(go is Player) && !(go is Projectile))
-                {
-                    go.position += velocity * 10;
-                }
-                /*if (go is BackGround)
-                {
-                    go.position += velocity * 2;
-                }*/
-            }
-        }
-
 
 
 
@@ -145,6 +131,21 @@ namespace BananaSplit
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+
+        public void moveAll(Vector2 velocity)
+        {
+            foreach (GameObject go in gameObjects)
+            {
+                if (!(go is Player) && !(go is Projectile))
+                {
+                    go.position += velocity * 10;
+                }
+                /*if (go is BackGround)
+                {
+                    go.position += velocity * 2;
+                }*/
+            }
+        }
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))

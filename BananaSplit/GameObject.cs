@@ -12,15 +12,10 @@ namespace BananaSplit
 {
     public abstract class GameObject
     {
-        //Flere sprites i et array.
-        protected Texture2D[] sprites;
         //En sprite.
         protected Texture2D sprite;
-
-        public Texture2D tex;
-
-
-
+        //Flere sprites i et array.
+        protected Texture2D[] sprites;
         //Frames per seconds, bruges til animation af sprites.
         protected int fps;
         //Bruges til Player og Enemey movement.

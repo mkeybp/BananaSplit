@@ -176,8 +176,9 @@ namespace BananaSplit
 
             if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W) && isGrounded == true)
             {
-                velocity += new Vector2(0, -50);
-
+                velocity += new Vector2(0, -100);
+                //velocity += new Vector2()
+                Move(gameTime);
             }
 
 
@@ -224,7 +225,7 @@ namespace BananaSplit
         {
             if (position.Y < 1200 && !currentKey.IsKeyDown(Keys.W) && !currentKey.IsKeyDown(Keys.Up))
             {
-                velocity += new Vector2(0, 10);
+                velocity += new Vector2(0, 5);
             }
             Move(gameTime);
 

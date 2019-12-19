@@ -21,9 +21,6 @@ namespace BananaSplit
         Song song;
 
         private Texture2D background1;
-        private Texture2D background2;
-        private Texture2D background3;
-        private Texture2D background4;
         private Texture2D heartFull;
         private Texture2D heartEmpty;
         private Texture2D bananaPoints;
@@ -31,7 +28,6 @@ namespace BananaSplit
         public int health;
         private SpriteFont bananaCounter;
 
-        private Vector2 screenSize;
 
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -64,7 +60,7 @@ namespace BananaSplit
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
-            gameObjects.Add(new Platform());
+            //gameObjects.Add(new Platform());
             gameObjects.Add(new Loot());
             gameObjects.Add(new Boost());
 
@@ -92,6 +88,26 @@ namespace BananaSplit
             song = Content.Load<Song>("By the Fire");
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
+
+            Platform platform = new Platform(Content.Load<Texture2D>("platform"));
+            GameWorld.Instance.gameObjectsToAdd.Add(platform);
+            platform.position = new Vector2(0, 1020);
+
+            Platform platform1 = new Platform(Content.Load<Texture2D>("platform"));
+            GameWorld.Instance.gameObjectsToAdd.Add(platform1);
+            platform1.position = new Vector2(200, 1020);
+
+            Platform platform2 = new Platform(Content.Load<Texture2D>("platform"));
+            GameWorld.Instance.gameObjectsToAdd.Add(platform2);
+            platform2.position = new Vector2(400, 1020);
+
+            Platform platform3 = new Platform(Content.Load<Texture2D>("platform"));
+            GameWorld.Instance.gameObjectsToAdd.Add(platform3);
+            platform3.position = new Vector2(600, 1020);
+
+            Platform platform4 = new Platform(Content.Load<Texture2D>("platform"));
+            GameWorld.Instance.gameObjectsToAdd.Add(platform4);
+            platform4.position = new Vector2(800, 1020);
 
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObject in gameObjects)

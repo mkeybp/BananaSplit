@@ -20,7 +20,10 @@ namespace BananaSplit
         public Texture2D tex;
 
         public bool isAlive;
-        
+
+        protected Vector2[] positions;
+
+        protected Texture2D platform;
 
    
 
@@ -47,7 +50,7 @@ namespace BananaSplit
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, sprite.Width * 2, sprite.Height);
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width / 2, sprite.Height);
             }
         }
         public abstract void OnCollision(GameObject other);
@@ -76,7 +79,7 @@ namespace BananaSplit
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, 1);
-
+            //spriteBatch.Draw(Platform)
         }
         public abstract void LoadContent(ContentManager content);
 

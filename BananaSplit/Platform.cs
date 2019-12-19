@@ -13,10 +13,12 @@ namespace BananaSplit
     class Platform : GameObject
     {
         //private List<Platform> platforms = new List<Platform>();
-
-        public Platform()
+        
+        public Platform(Texture2D loadedTexture)
         {
-            position = new Vector2(0, 1020);
+            sprite = loadedTexture;
+            //positions[0] = new Vector2(0, 1020);
+            //positions[1] = new Vector2(300, 1020);
         }
 
         public void Initialize(GameTime gameTime)
@@ -27,20 +29,29 @@ namespace BananaSplit
         {
 
             sprite = content.Load<Texture2D>("platform");
+            this.position = new Vector2(0, 1020);
+            sprite = content.Load<Texture2D>("platform");
+            this.position = new Vector2(200, 1020);
+            sprite = content.Load<Texture2D>("platform");
+            this.position = new Vector2(400, 1020);
+            sprite = content.Load<Texture2D>("platform");
+            this.position = new Vector2(600, 1020);
+            sprite = content.Load<Texture2D>("platform");
+            this.position = new Vector2(800, 1020);
             //position = new Vector2(0, 425);
             //position = new Vector2(100, 425);
         }
 
         public override void Update(GameTime gameTime)
         {
-
+            //foreach()
         }
 
         public override Rectangle CollisionBox
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, sprite.Width * 2, sprite.Height);
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
             }
         }
         public override void OnCollision(GameObject @object)

@@ -59,6 +59,9 @@ namespace BananaSplit
             Move(gameTime);
             playerPosition = this.position;
 
+            {
+
+            }
             /*//Gravity(gameTime);
             if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
@@ -92,6 +95,7 @@ namespace BananaSplit
             velocity = Vector2.Zero;
 
 
+
             KeyboardState kbState = Keyboard.GetState();
             if (kbState.IsKeyDown(Keys.A))
             {
@@ -104,7 +108,19 @@ namespace BananaSplit
 
             }
 
+            if (kbState.IsKeyDown(Keys.O))
+            {
 
+                Platform platform = new Platform(content.Load<Texture2D>("platform"));
+                GameWorld.Instance.gameObjectsToAdd.Add(platform);
+                platform.position = new Vector2(0,1020);
+            }
+            if (kbState.IsKeyDown(Keys.O))
+            {
+                Platform platform1 = new Platform(content.Load<Texture2D>("platform"));
+                GameWorld.Instance.gameObjectsToAdd.Add(platform1);
+                platform1.position = new Vector2(300, 1020);
+            }
             if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W) && isGrounded == true)
             {
                 velocity += new Vector2(0, -250);

@@ -40,6 +40,7 @@ namespace BananaSplit
             this.position = new Vector2(800, 1020);
             //position = new Vector2(0, 425);
             //position = new Vector2(100, 425);
+
         }
 
         public override void Update(GameTime gameTime)

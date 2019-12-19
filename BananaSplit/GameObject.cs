@@ -47,7 +47,7 @@ namespace BananaSplit
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width * 2, sprite.Height);
             }
         }
         public abstract void OnCollision(GameObject other);

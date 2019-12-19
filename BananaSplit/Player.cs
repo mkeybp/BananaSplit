@@ -59,7 +59,7 @@ namespace BananaSplit
             Move(gameTime);
             playerPosition = this.position;
 
-            //Gravity(gameTime);
+            /*//Gravity(gameTime);
             if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
                 // No collision
@@ -77,7 +77,7 @@ namespace BananaSplit
             if (position.Y > 1050)
             {
                 position = new Vector2(0, 760);
-            }
+            }*/
 
             if (isGrounded == false)
             {
@@ -105,7 +105,7 @@ namespace BananaSplit
             }
 
 
-            if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W))
+            if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W) && isGrounded == true)
             {
                 velocity += new Vector2(0, -250);
 

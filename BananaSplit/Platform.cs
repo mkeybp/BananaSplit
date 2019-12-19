@@ -35,6 +35,14 @@ namespace BananaSplit
         {
 
         }
+
+        public override Rectangle CollisionBox
+        {
+            get
+            {
+                return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+            }
+        }
         public override void OnCollision(GameObject @object)
         {
 

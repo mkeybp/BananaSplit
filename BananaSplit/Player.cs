@@ -19,6 +19,8 @@ namespace BananaSplit
         ContentManager content;
         KeyboardState previousKBState;
 
+        private bool isGrounded = true;
+
         public Player()
         {
             speed = 50f;
@@ -77,7 +79,11 @@ namespace BananaSplit
                 position = new Vector2(0, 760);
             }
 
-
+            if (isGrounded == false)
+            {
+                Gravity(gameTime);
+            }
+            isGrounded = false;
 
 
         }
@@ -110,15 +116,10 @@ namespace BananaSplit
                 Projectile projectile = new Projectile(content.Load<Texture2D>("stone"));
                 GameWorld.Instance.gameObjectsToAdd.Add(projectile);
 
-
-            }
-
-            else if (!kbState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyUp(Keys.Space))
-
-            {
                 sprite = content.Load<Texture2D>("player_shooting");
 
             }
+
 
             if ((kbState.IsKeyDown(Keys.D)) || (kbState.IsKeyDown(Keys.A)) || kbState.IsKeyDown(Keys.W) || kbState.IsKeyDown(Keys.Right) || kbState.IsKeyDown(Keys.Left) || kbState.IsKeyDown(Keys.Up))
             {
@@ -159,8 +160,16 @@ namespace BananaSplit
             }
             else if (@object is Boost)
             {
-                GameWorld.Instance.bananaCounter1 += 4000;
+                GameWorld.Instance.bananaCounter1 += 10000;
 
+            }
+            if (!(@object is Platform))
+            {
+                isGrounded = false;
+            }
+            if (@object is Platform)
+            {
+                isGrounded = true;
             }
 
         }

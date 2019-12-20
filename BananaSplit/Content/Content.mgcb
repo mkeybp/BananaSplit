@@ -182,6 +182,13 @@
 /processorParam:TextureFormat=Color
 /build:dadler.png
 
+#begin gameOver.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:gameOver.spritefont
+
 #begin heartempty.png
 /importer:TextureImporter
 /processor:TextureProcessor

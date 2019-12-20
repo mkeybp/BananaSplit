@@ -12,13 +12,9 @@ namespace BananaSplit
 {
     class Platform : GameObject
     {
-        //private List<Platform> platforms = new List<Platform>();
-        
-        public Platform(Texture2D loadedTexture)
+        public Platform(Vector2 position)
         {
-            sprite = loadedTexture;
-            //positions[0] = new Vector2(0, 1020);
-            //positions[1] = new Vector2(300, 1020);
+            this.position = position;
         }
 
         public void Initialize(GameTime gameTime)
@@ -28,19 +24,26 @@ namespace BananaSplit
         public override void LoadContent(ContentManager content)
         {
 
-            sprite = content.Load<Texture2D>("platform");
-            this.position = new Vector2(0, 1020);
-            sprite = content.Load<Texture2D>("platform");
-            this.position = new Vector2(200, 1020);
-            sprite = content.Load<Texture2D>("platform");
-            this.position = new Vector2(400, 1020);
-            sprite = content.Load<Texture2D>("platform");
-            this.position = new Vector2(600, 1020);
-            sprite = content.Load<Texture2D>("platform");
-            this.position = new Vector2(800, 1020);
-            //position = new Vector2(0, 425);
-            //position = new Vector2(100, 425);
 
+
+            // Et spritearray Instantieres
+            sprites = new Texture2D[1];
+
+            // Sprites bliver loadet ind i arrayet
+            sprites[0] = content.Load<Texture2D>("Platform");
+            sprite = sprites[0];
+
+
+            //sprite = content.Load<Texture2D>("platform");
+            //this.position = new Vector2(0, 1020);
+            //sprite = content.Load<Texture2D>("platform");
+            //this.position = new Vector2(200, 1020);
+            //sprite = content.Load<Texture2D>("platform");
+            //this.position = new Vector2(400, 1020);
+            //sprite = content.Load<Texture2D>("platform");
+            //this.position = new Vector2(600, 1020);
+            //sprite = content.Load<Texture2D>("platform");
+            //this.position = new Vector2(800, 1020);
         }
 
         public override void Update(GameTime gameTime)

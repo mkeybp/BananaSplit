@@ -15,7 +15,7 @@ namespace BananaSplit
     {
         public Boost()
         {
-            position = new Vector2(450, 945);
+            position = new Vector2(1400, 920);
 
         }
         public override void LoadContent(ContentManager content)

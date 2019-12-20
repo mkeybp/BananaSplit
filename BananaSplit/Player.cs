@@ -25,12 +25,15 @@ namespace BananaSplit
         {
             speed = 50f;
             position = new Vector2(0, 760);
-
+            GameWorld.Instance.health = 30;
+            isAlive = true;
 
         }
+
+
         private static Vector2 playerPosition;
 
-
+    
         public static Vector2 PlayerPosition
         {
             get { return playerPosition; }
@@ -59,28 +62,10 @@ namespace BananaSplit
             Move(gameTime);
             playerPosition = this.position;
 
+            if (GameWorld.Instance.health <= 10)
             {
-
+                isAlive = false;
             }
-            /*//Gravity(gameTime);
-            if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
-            {
-                // No collision
-                Gravity(gameTime);
-            }
-            else
-            {
-                // Collision
-                if (currentKey.IsKeyDown(Keys.W) || previousKey.IsKeyDown(Keys.W))//currentKey.IsKeyDown(Keys.Up))
-                {
-                    velocity += new Vector2(0, -300);
-                }
-                Move(gameTime);
-            }
-            if (position.Y > 1050)
-            {
-                position = new Vector2(0, 760);
-            }*/
 
             if (isGrounded == false)
             {
@@ -94,56 +79,69 @@ namespace BananaSplit
         {
             velocity = Vector2.Zero;
 
-
-
             KeyboardState kbState = Keyboard.GetState();
-            if (kbState.IsKeyDown(Keys.A))
-            {
-                velocity += new Vector2(-1, 0);
 
-            }
-            if (kbState.IsKeyDown(Keys.D))
-            {
-                velocity += new Vector2(1, 0);
-
-            }
-
-            if (kbState.IsKeyDown(Keys.O))
+            if (isAlive == true)
             {
 
-                Platform platform = new Platform(content.Load<Texture2D>("platform"));
-                GameWorld.Instance.gameObjectsToAdd.Add(platform);
-                platform.position = new Vector2(0,1020);
+                if (kbState.IsKeyDown(Keys.A))
+                {
+                    velocity += new Vector2(-1, 0);
+
+                }
+                if (kbState.IsKeyDown(Keys.D))
+                {
+                    velocity += new Vector2(1, 0);
+
+                }
+
+                if (kbState.IsKeyDown(Keys.O))
+                {
+
+                    //Platform platform = new Platform(content.Load<Texture2D>("platform"));
+                    //GameWorld.Instance.gameObjectsToAdd.Add(platform);
+                    //platform.position = new Vector2(0,1020);
+                }
+                if (kbState.IsKeyDown(Keys.O))
+                {
+                    //Platform platform1 = new Platform(content.Load<Texture2D>("platform"));
+                    //GameWorld.Instance.gameObjectsToAdd.Add(platform1);
+                    //platform1.position = new Vector2(300, 1020);
+                }
+                if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W) && isGrounded == true)
+                {
+                    velocity += new Vector2(0, -250);
+
+                }
+
+                if (kbState.IsKeyDown(Keys.Space) && previousKBState.IsKeyUp(Keys.Space))
+                {
+                    Projectile projectile = new Projectile(content.Load<Texture2D>("stone"));
+                    GameWorld.Instance.gameObjectsToAdd.Add(projectile);
+
+                    sprite = content.Load<Texture2D>("player_shooting");
+
+                }
+
+
+                if ((kbState.IsKeyDown(Keys.D)) || (kbState.IsKeyDown(Keys.A)) || kbState.IsKeyDown(Keys.W) || kbState.IsKeyDown(Keys.Right) || kbState.IsKeyDown(Keys.Left) || kbState.IsKeyDown(Keys.Up))
+                {
+                    Animation(gameTime);
+                }
+
+                    previousKBState = kbState;
+
             }
-            if (kbState.IsKeyDown(Keys.O))
+
+            // Play again
+            if (kbState.IsKeyDown(Keys.Enter))
             {
-                Platform platform1 = new Platform(content.Load<Texture2D>("platform"));
-                GameWorld.Instance.gameObjectsToAdd.Add(platform1);
-                platform1.position = new Vector2(300, 1020);
+                GameWorld.Instance.health = 30;
+                GameWorld.Instance.bananaCounter = 0;
+                Enemy.EnemyPosition = new Vector2(1500, 760);
+                isAlive = true;
+                position = new Vector2(100, 100);
             }
-            if (kbState.IsKeyDown(Keys.W) && previousKBState.IsKeyUp(Keys.W) && isGrounded == true)
-            {
-                velocity += new Vector2(0, -250);
-
-            }
-
-            if (kbState.IsKeyDown(Keys.Space) && previousKBState.IsKeyUp(Keys.Space))
-            {
-                Projectile projectile = new Projectile(content.Load<Texture2D>("stone"));
-                GameWorld.Instance.gameObjectsToAdd.Add(projectile);
-
-                sprite = content.Load<Texture2D>("player_shooting");
-
-            }
-
-
-            if ((kbState.IsKeyDown(Keys.D)) || (kbState.IsKeyDown(Keys.A)) || kbState.IsKeyDown(Keys.W) || kbState.IsKeyDown(Keys.Right) || kbState.IsKeyDown(Keys.Left) || kbState.IsKeyDown(Keys.Up))
-            {
-                Animation(gameTime);
-            }
-
-            previousKBState = kbState;
-
 
             Vector2 temp = velocity;
             temp.Y = 0;
@@ -164,19 +162,22 @@ namespace BananaSplit
             Move(gameTime);
 
         }
+
         public override void OnCollision(GameObject @object)
         {
             if (@object is Loot)
             {
-                GameWorld.Instance.bananaCounter1 += 1000;
+                /// Er sat lavere end der står i raporten, da loot ikke bliver fjernet ved collision
+                /// Så det går alt for hurtigt med at samle alle bananer op
+                GameWorld.Instance.bananaCounter += 100;
             }
             else if (@object is Enemy)
             {
-                GameWorld.Instance.health--;
+                GameWorld.Instance.health -= 1;
             }
             else if (@object is Boost)
             {
-                GameWorld.Instance.bananaCounter1 += 10000;
+                GameWorld.Instance.bananaCounter += 1000;
 
             }
             if (!(@object is Platform))

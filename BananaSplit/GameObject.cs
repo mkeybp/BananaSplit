@@ -25,7 +25,7 @@ namespace BananaSplit
 
         protected Texture2D platform;
 
-   
+        public int health;
 
         //Frames per seconds, bruges til animation af sprites.
         protected int fps;

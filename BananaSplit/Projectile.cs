@@ -46,8 +46,6 @@ namespace BananaSplit
 
         }
 
-        Enemy enemy = new Enemy();
-
         public override void OnCollision(GameObject @object)
         {
 

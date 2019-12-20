@@ -15,7 +15,7 @@ namespace BananaSplit
     {
         public Loot()
         {
-            position = new Vector2(300, 940);
+            position = new Vector2(300, 920);
         }
         public override void LoadContent(ContentManager content)
         {

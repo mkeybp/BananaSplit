@@ -14,21 +14,28 @@ namespace BananaSplit
     class Enemy : GameObject
     {
 
-        public int enemyHealth = 2;
-
         public Enemy()
         {
-            position = new Vector2(700, 750);
+            position = new Vector2(1500, 750);
             speed = 2f;
+            isAlive = true;
+            health = 2;
+        }
 
+
+        private static Vector2 enemyPosition;
+
+
+        public static Vector2 EnemyPosition
+        {
+            get { return enemyPosition; }
+            set { enemyPosition = value; }
         }
 
         public override void LoadContent(ContentManager content)
         {
-            if (enemyHealth == 2 || enemyHealth == 1)
+            if (isAlive)
             {
-
-
                 sprites = new Texture2D[3];
 
                 for (int i = 0; i < sprites.Length; i++)
@@ -37,17 +44,16 @@ namespace BananaSplit
                 }
 
                 fps = 3;
-
-                //sprite = sprites[0];
             }
-            Debug.WriteLine(enemyHealth);
-
         }
 
         public override void Update(GameTime gameTime)
         {
             EnemyMove(gameTime);
             Animation(gameTime);
+
+            enemyPosition = this.position;
+
             if (position.X + sprite.Width < 10 || position.X > 10 + sprite.Width || position.Y + sprite.Height < 1020 || position.Y > 1020 + sprite.Height)
             {
                 // No collision
@@ -61,6 +67,10 @@ namespace BananaSplit
             {
                 position = new Vector2(0, 750);
             }
+            //if (Ene)
+            //{
+
+            //}
         }
 
         /// <summary>

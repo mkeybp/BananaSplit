@@ -13,20 +13,20 @@ namespace BananaSplit
     /// </summary>
     public class GameWorld : Game
     {
-        private List<GameObject> gameObjects = new List<GameObject>();
+        public List<GameObject> gameObjects = new List<GameObject>();
         public List<GameObject> gameObjectsToAdd = new List<GameObject>();
         public List<GameObject> gameObjectsToRemove = new List<GameObject>();
 
         public static GameWorld Instance;
         Song song;
 
-        private Texture2D background1;
+        private Texture2D background;
         private Texture2D heartFull;
-        private Texture2D heartEmpty;
         private Texture2D bananaPoints;
-        public int bananaCounter1;
+        public int bananaCounter;
         public int health;
-        private SpriteFont bananaCounter;
+        private SpriteFont text;
+
 
 
         public GraphicsDeviceManager graphics;
@@ -38,8 +38,7 @@ namespace BananaSplit
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Instance = this;
-            bananaCounter1 = 0;
-            health = 3;
+            bananaCounter = 0;
         }
 
         /// <summary>
@@ -77,45 +76,41 @@ namespace BananaSplit
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //test = Content.Load<Texture2D>("test");
-            background1 = Content.Load<Texture2D>("background");
-            //background2 = Content.Load<Texture2D>("2background");
-            //background3 = Content.Load<Texture2D>("3background");
-            //background4 = Content.Load<Texture2D>("4background");
+            background = Content.Load<Texture2D>("background");
             heartFull = Content.Load<Texture2D>("heartfull");
-            heartEmpty = Content.Load<Texture2D>("heartempty");
             bananaPoints = Content.Load<Texture2D>("smallBanana");
-            bananaCounter = Content.Load<SpriteFont>("bananaCounter");
+            text = Content.Load<SpriteFont>("gameOver");
             song = Content.Load<Song>("By the Fire");
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
 
-            Platform platform = new Platform(Content.Load<Texture2D>("platform"));
-            GameWorld.Instance.gameObjectsToAdd.Add(platform);
-            platform.position = new Vector2(0, 1020);
 
-            Platform platform1 = new Platform(Content.Load<Texture2D>("platform"));
-            GameWorld.Instance.gameObjectsToAdd.Add(platform1);
-            platform1.position = new Vector2(200, 1020);
+            gameObjects.Add(new Platform(new Vector2(-295, 1000)));
+            gameObjects.Add(new Platform(new Vector2(-295, 900)));
+            gameObjects.Add(new Platform(new Vector2(-295, 800)));
+            gameObjects.Add(new Platform(new Vector2(-295, 700)));
+            gameObjects.Add(new Platform(new Vector2(-295, 600)));
+            gameObjects.Add(new Platform(new Vector2(-295, 500)));
 
-            Platform platform2 = new Platform(Content.Load<Texture2D>("platform"));
-            GameWorld.Instance.gameObjectsToAdd.Add(platform2);
-            platform2.position = new Vector2(400, 1020);
+            gameObjects.Add(new Platform(new Vector2(0, 1000)));
+            gameObjects.Add(new Platform(new Vector2(295, 1000)));
+            gameObjects.Add(new Platform(new Vector2(590, 1000)));
+            gameObjects.Add(new Platform(new Vector2(885, 1000)));
+            gameObjects.Add(new Platform(new Vector2(1180, 1000)));
+            gameObjects.Add(new Platform(new Vector2(1475, 1000)));
 
-            Platform platform3 = new Platform(Content.Load<Texture2D>("platform"));
-            GameWorld.Instance.gameObjectsToAdd.Add(platform3);
-            platform3.position = new Vector2(600, 1020);
+            gameObjects.Add(new Platform(new Vector2(1770, 900)));
+            gameObjects.Add(new Platform(new Vector2(2065, 800)));
+            gameObjects.Add(new Platform(new Vector2(2360, 750)));
+            gameObjects.Add(new Platform(new Vector2(2655, 700)));
+            gameObjects.Add(new Platform(new Vector2(2950, 800)));
+            gameObjects.Add(new Platform(new Vector2(3245, 900)));
 
-            Platform platform4 = new Platform(Content.Load<Texture2D>("platform"));
-            GameWorld.Instance.gameObjectsToAdd.Add(platform4);
-            platform4.position = new Vector2(800, 1020);
-
-            // TODO: use this.Content to load your game content here
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
             }
-            //screenWidth = device.PresentationParameters.BackBufferWidth;
-            //screenHeight = device.PresentationParameters.BackBufferHeight;
+
         }
 
 
@@ -127,10 +122,6 @@ namespace BananaSplit
                 {
                     go.position += velocity * 15;
                 }
-                /*if (go is BackGround)
-                {
-                    go.position += velocity * 2;
-                }*/
             }
         }
 
@@ -177,7 +168,6 @@ namespace BananaSplit
             gameObjects.RemoveAll(go => gameObjectsToRemove.Contains(go));
             gameObjectsToRemove.Clear();
 
-            Debug.WriteLine(health);
 
 
             gameObjectsToAdd.Clear();
@@ -196,39 +186,72 @@ namespace BananaSplit
 
 
 
-
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            spriteBatch.Draw(background1, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            //spriteBatch.Draw(background2, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            //spriteBatch.Draw(background3, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            //spriteBatch.Draw(background4, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(background, new Vector2(0, 0), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
 
-            if (health == 1 || health == 2 || health == 3)
+            if (health >= 10 || health >= 20 || health >= 30)
             {
                 spriteBatch.Draw(heartFull, new Vector2(10, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
-            if (health == 2 || health == 3)
+            if (health >= 20 || health >= 30)
             {
                 spriteBatch.Draw(heartFull, new Vector2(50, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
-            if (health == 3)
+            if (health >= 30)
             {
                 spriteBatch.Draw(heartFull, new Vector2(90, 15), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             }
-            if (health == 0)
-            {
-                bananaCounter1 = 0;
-            }
+
 
 
             spriteBatch.Draw(bananaPoints, new Vector2(10, 70), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawString(bananaCounter, ": " + bananaCounter1, new Vector2(65, 75), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(text, ": " + bananaCounter, new Vector2(65, 75), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+            int bananasNeeded = 40000 - bananaCounter;
+
+            // GameoverTxT
+            if (health <= 0)
+            {
+                //isAlive = false;
+                spriteBatch.DrawString(text,
+                                       "You only needed " + bananasNeeded + " more bananas, to remove banana-food-waste for today.\n See you again tomorrow for 40.000 more \n BUT you gathered enough bananas to produce {x_amount} of ice cream \n\n PRESS ENTER TO PLAY AGAIN",
+                                       new Vector2(150, graphics.GraphicsDevice.Viewport.Height / 2),
+                                       Color.White,
+                                       0,
+                                       Vector2.Zero,
+                                       1,
+                                       SpriteEffects.None,
+                                       0);
+            }
+            if (bananaCounter >= 40000)
+            {
+                bananaCounter = 40000;
+            }
+            if (bananaCounter == 40000 && health > 0)
+            {
+
+                //spriteBatch.Draw(background, new Vector2(0, 0), null, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1f);
+
+
+                spriteBatch.DrawString(text,
+                                 "Congrats! You made it to level 2! \n In England they discard around 1.500.000 bananas EVERY day!\n Collect all 1.500.000 to advance to win the game \n and to produce {x_amount} of ice cream!"
+,
+                                 new Vector2(150, graphics.GraphicsDevice.Viewport.Height / 2),
+                                 Color.White,
+                                 0,
+                                 Vector2.Zero,
+                                 1,
+                                 SpriteEffects.None,
+                                 0);
+            }
+
+
 
             foreach (GameObject gameObject in gameObjects)
             {
